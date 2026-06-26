@@ -1,0 +1,8 @@
+name = "legacy-device-proxy"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# Worker内で使用する環境変数
+[vars]
+# ここを実際のCloudflare PagesのデフォルトURL（○○.pages.dev）に変更してください
+PAGES_DOMAIN = "your-project-name.pages.dev"

@@ -1,0 +1,70 @@
+/* とことんシンプルなクロスデバイス対応CSS */
+
+body {
+    /* パソコン等で広がりすぎないよう最大幅を設定し、中央寄せ */
+    max-width: 800px;
+    margin: 0 auto;
+    /* 画面端にコンテンツがくっつかないように余白を設ける */
+    padding: 10px;
+    /* 見やすい標準フォントと行間 */
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    /* 古いブラウザやスマートウォッチでの文字はみ出しを防ぐ */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    font-size: 1.2em; /* 画面が小さい端末でも大きくなりすぎないように調整 */
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-size: 1.1em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #ccc; /* セクションの区切りをシンプルに表現 */
+    padding-bottom: 5px;
+}
+
+/* 動画が画面幅をはみ出さないようにする（最重要） */
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* タッチデバイス（スマホ・ウォッチ・ゲーム機）でも押しやすいボタンサイズ */
+button {
+    font-size: 1em;
+    padding: 8px 12px;
+    margin: 4px 4px 4px 0;
+    cursor: pointer;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    border-radius: 4px; /* 極めてシンプルな角丸 */
+}
+
+button:hover, button:active {
+    background-color: #ddd;
+}
+
+/* ダウンロードリンク等のリストの余白調整 */
+dl {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-left: 3px solid #eee;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-left: 0;
+    margin-top: 5px;
+}

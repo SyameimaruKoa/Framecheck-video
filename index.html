@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フレームカウント動画</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>モニターの残像やすべてのフレームが正常に表示されているかを調べる動画です</h1>
+    <h2>60fps版</h2>
+    <video src="videos/Framecount_V2_60fps.mp4" controls loop loading="lazy" preload="metadata">
+        <object type="application/x-shockwave-flash" data="videos/Framecount_V2_60fps.swf" width="480" height="270">
+            <param name="movie" value="videos/Framecount_V2_60fps.swf">
+            <param name="loop" value="true">
+            <p>お使いのブラウザは動画の埋め込み再生に対応していません。下のリンクからダウンロードしてご覧ください。</p>
+        </object>
+    </video>
+    <button id="btn_60">60fps</button>
+    <button id="btn_60_90">90fps</button>
+    <button id="btn_60_120">120fps</button>
+    <button id="btn_60_180">180fps</button>
+    <dl>
+        <dt><a href="videos/Framecount_V2_60fps.mp4" download="Framecount_V2_60fps.mp4">軽量ファイルダウンロード</a></dt>
+        <dt><a href="videos/Framecount_V2_60fps.swf" download="Framecount_V2_60fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a></dt>
+        <dt><a href="videos/元データ/フレームカウント V2 60fps.mp4">元動画プレビュー</a></dt>
+        <dd><a href="videos/元データ/フレームカウント V2 60fps.mp4" download="フレームカウント V2 60fps.mp4">ダウンロード</a></dd>
+    </dl>
+
+    <h2>24fps版</h2>
+    <video src="videos/Framecount_V2_24fps.mp4" controls loop loading="lazy" preload="metadata">
+        <object type="application/x-shockwave-flash" data="videos/Framecount_V2_24fps.swf" width="480" height="270">
+            <param name="movie" value="videos/Framecount_V2_24fps.swf">
+            <param name="loop" value="true">
+            <p>お使いのブラウザは動画の埋め込み再生に対応していません。下のリンクからダウンロードしてご覧ください。</p>
+        </object>
+    </video>
+    <button id="btn_24">24fps</button>
+    <button id="btn_24_48">48fps</button>
+    <button id="btn_24_72">72fps</button>
+    <button id="btn_24_96">96fps</button>
+    <button id="btn_24_144">144fps</button>
+    <dl>
+        <dt><a href="videos/Framecount_V2_24fps.mp4" download="Framecount_V2_24fps.mp4">軽量ファイルダウンロード</a></dt>
+        <dt><a href="videos/Framecount_V2_24fps.swf" download="Framecount_V2_24fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a></dt>
+        <dt><a href="videos/元データ/フレームカウント V2 24fps.mp4">元動画プレビュー</a></dt>
+        <dd><a href="videos/元データ/フレームカウント V2 24fps.mp4" download="フレームカウント V2 24fps.mp4">ダウンロード</a></dd>
+    </dl>
+    <hr>
+    <h2>注意事項・ソースコード</h2>
+    <ul>
+        <li>ファイルは常識の範囲で自由に使っていいですが、二次配布のみNG</li>
+        <li>ソースコード: <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHubリポジトリ</a></li>
+    </ul>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
