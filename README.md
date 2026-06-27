@@ -4,9 +4,15 @@
 
 ## プレビュー
 
-<video src="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/Framecount_V2_60fps.mp4" width="320" controls></video>
-<br>
-<video src="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/Framecount_V2_24fps.mp4" width="320" controls></video>
+※ 60fpsは容量の関係でREADMEに載せれませんでした。
+
+- [60fps動画プレビュー (Framecount_V2_60fps.mp4)](videos/Framecount_V2_60fps.mp4)
+
+24fps
+
+https://github.com/user-attachments/assets/15bc4fcb-36f0-4442-81bf-b058aac747f1
+
+
 
 ---
 
