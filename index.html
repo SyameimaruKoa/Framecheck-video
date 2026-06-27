@@ -10,7 +10,15 @@
 
 <body>
     <h1>モニターの残像やすべてのフレームが正常に表示されているかを調べる動画です</h1>
-    <h2>60fps版</h2>
+    <nav>
+        <ul>
+            <li><a href="#v2-60fps">60fps版</a></li>
+            <li><a href="#v2-24fps">24fps版</a></li>
+            <li><a href="#v1">旧バージョンファイル</a></li>
+            <li><a href="#notes">注意事項・ソースコード</a></li>
+        </ul>
+    </nav>
+    <h2 id="v2-60fps">60fps版</h2>
     <video src="videos/Framecount_V2_60fps.mp4" controls loop loading="lazy" preload="metadata">
         <object type="application/x-shockwave-flash" data="videos/Framecount_V2_60fps.swf" width="480" height="270">
             <param name="movie" value="videos/Framecount_V2_60fps.swf">
@@ -24,15 +32,20 @@
     <button id="btn_60_180">180fps</button>
     <dl>
         <dt><a href="videos/Framecount_V2_60fps.mp4" download="Framecount_V2_60fps.mp4">軽量ファイルダウンロード</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_60fps.mp4">バックアップリンク (H264 720p)</a></dd>
-        <dt><a href="videos/Framecount_V2_60fps.swf" download="Framecount_V2_60fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_60fps.swf">バックアップリンク (Flash)</a></dd>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_60fps.mp4">バックアップリンク
+                (H264 720p)</a></dd>
+        <dt><a href="videos/Framecount_V2_60fps.swf" download="Framecount_V2_60fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a>
+        </dt>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_60fps.swf">バックアップリンク
+                (Flash)</a></dd>
         <dt>高画質版ファイルダウンロード (H265 / VP9)</dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_60fps.mp4">ダウンロード (H265 2160p)</a></dd>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_60fps.webm">ダウンロード (VP9 2160p)</a></dd>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_60fps.mp4">ダウンロード
+                (H265 2160p)</a></dd>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_60fps.webm">ダウンロード
+                (VP9 2160p)</a></dd>
     </dl>
 
-    <h2>24fps版</h2>
+    <h2 id="v2-24fps">24fps版</h2>
     <video src="videos/Framecount_V2_24fps.mp4" controls loop loading="lazy" preload="metadata">
         <object type="application/x-shockwave-flash" data="videos/Framecount_V2_24fps.swf" width="480" height="270">
             <param name="movie" value="videos/Framecount_V2_24fps.swf">
@@ -47,15 +60,29 @@
     <button id="btn_24_144">144fps</button>
     <dl>
         <dt><a href="videos/Framecount_V2_24fps.mp4" download="Framecount_V2_24fps.mp4">軽量ファイルダウンロード</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_24fps.mp4">バックアップリンク (H264 720p)</a></dd>
-        <dt><a href="videos/Framecount_V2_24fps.swf" download="Framecount_V2_24fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_24fps.swf">バックアップリンク (Flash)</a></dd>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_24fps.mp4">バックアップリンク
+                (H264 720p)</a></dd>
+        <dt><a href="videos/Framecount_V2_24fps.swf" download="Framecount_V2_24fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a>
+        </dt>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_24fps.swf">バックアップリンク
+                (Flash)</a></dd>
         <dt>高画質版ファイルダウンロード (H265 / VP9)</dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_24fps.mp4">ダウンロード (H265 2160p)</a></dd>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_24fps.webm">ダウンロード (VP9 2160p)</a></dd>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_24fps.mp4">ダウンロード
+                (H265 2160p)</a></dd>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_24fps.webm">ダウンロード
+                (VP9 2160p)</a></dd>
     </dl>
+
+    <h2 id="v1">旧バージョンファイル</h2>
+    <video src="videos/frametest_v1.mp4" controls loop loading="lazy" preload="metadata"></video>
+    <dl>
+        <dt><a href="videos/frametest_v1.mp4" download="frametest_v1.mp4">軽量ファイルダウンロード</a></dt>
+        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/frametest_v1_60fps.mp4">バックアップリンク
+                (GitHub Release)</a></dd>
+    </dl>
+
     <hr>
-    <h2>注意事項・ソースコード</h2>
+    <h2 id="notes">注意事項・ソースコード</h2>
     <ul>
         <li>ファイルは常識の範囲で自由に使っていいですが、二次配布のみNG</li>
         <li>ソースコード: <a href="https://github.com/SyameimaruKoa/Framecheck-video" target="_blank"
