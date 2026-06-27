@@ -4,9 +4,9 @@
 
 ## プレビュー
 
-<video src="videos/Framecount_V2_60fps.mp4" width="320" controls></video>
+<video src="https://github.com/SyameimaruKoa/Framecheck-video/raw/refs/heads/main/videos/Framecount_V2_60fps.mp4" width="320" controls></video>
 <br>
-<video src="videos/Framecount_V2_24fps.mp4" width="320" controls></video>
+<video src="https://github.com/SyameimaruKoa/Framecheck-video/raw/refs/heads/main/videos/Framecount_V2_24fps.mp4" width="320" controls></video>
 
 ---
 
