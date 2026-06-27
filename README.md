@@ -12,15 +12,13 @@
 
 https://github.com/user-attachments/assets/15bc4fcb-36f0-4442-81bf-b058aac747f1
 
-
-
 ---
 
 ## 特徴
 
 - **とことんシンプルなUI**: 余計な装飾を省き、どのデバイスでも崩れないCSS2ベースの軽量デザイン。
 - **個別倍速機能**: 60fps版、24fps版のそれぞれの動画に対して独立して再生速度を変更可能。
-- **レガシーデバイス対応**: 
+- **レガシーデバイス対応**:
   - **Wii U / 3DS**: 最新のJS機能を使わず（ES5準拠）、エラーで止まらないように設計。倍速非対応の場合は親切なアラートを表示。
   - **PSP**: HTML5非対応のため、Flash Player (`.swf`) による再生フォールバック機能を搭載。
 
@@ -29,6 +27,8 @@ https://github.com/user-attachments/assets/15bc4fcb-36f0-4442-81bf-b058aac747f1
 ## デプロイと運用方法 (Cloudflare)
 
 このプロジェクトは、**モダンデバイス向けのCloudflare Pages**と、暗号化通信(HTTPS)ができない**レガシーデバイス向けのCloudflare Workers (プロキシ)**を組み合わせて運用します。
+
+HTTPは諦めた。めんどくせぇ
 
 ### 1. サイト本体のデプロイ (モダンデバイス向け)
 
@@ -46,7 +46,6 @@ PCやスマホと、PSP等の古いゲーム機で**全く同じURL（例: `test
    cd legacy-proxy
    npx wrangler deploy
    ```
-
 3. Cloudflareのダッシュボードで、デプロイしたWorker（`legacy-device-proxy`）を開きます。
 4. 「トリガー」タブから、公開したいご自身のカスタムドメイン・サブドメイン（例: `test.yourdomain.com/*`）を追加します。
 5. **【最重要】** Cloudflareの「ページルール (Page Rules)」を開き、その公開用サブドメインに対して **「常に HTTPS を使用する (Always Use HTTPS)」を無効(オフ)** に設定してください。
