@@ -30,7 +30,8 @@ https://github.com/user-attachments/assets/15bc4fcb-36f0-4442-81bf-b058aac747f1
 
 HTTPは諦めた。めんどくせぇ
 
-~~~
+<details>
+
 ### 1. サイト本体のデプロイ (モダンデバイス向け)
 
 このリポジトリをGitHubにプッシュし、Cloudflare Pagesと連携して通常通りデプロイします。
@@ -58,4 +59,4 @@ PCやスマホと、PSP等の古いゲーム機で**全く同じURL（例: `test
 - PCやスマホが `http://` でアクセスした場合: 安全な `https://` へ**自動的にリダイレクト**されます。
 - PSPやWii U等の古い機器が `http://` でアクセスした場合: リダイレクトせずに暗号化なしのまま通信し、サイトを正常に表示します。
 
-~~~
+</details>
