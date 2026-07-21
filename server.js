@@ -107,23 +107,33 @@ app.get('/video', (req, res) => {
     const ua = req.headers['user-agent'] || '';
     const isWiiU = /WiiU/i.test(ua);
     const isPSP = /PSP|PlayStation Portable/i.test(ua);
-    const isLegacyDevice = isWiiU || isPSP || /Nintendo|PlayStation/i.test(ua) || req.query.compat === '1';
+    const is3DS = /Nintendo 3DS/i.test(ua); // 3DS / New 3DS
+    const isLegacyDevice = isWiiU || isPSP || is3DS || /Nintendo|PlayStation/i.test(ua) || req.query.compat === '1';
 
     // PCやスマホなど、レガシー以外の通常端末での1.0倍速は元ファイルをそのまま送信
     if (speed === 1.0 && !isLegacyDevice) {
         return res.sendFile(sourcePath);
     }
 
-    // デバイスに応じた解像度とキャッシュ接頭辞の決定
+    // デバイスに応じた解像度、フレームレート制限、エンコードプロファイル等の決定
     let devicePrefix = '';
     let scaleFilter = '';
-    
-    if (isPSP) {
+    let fpsLimit = '';
+    let profileOption = '-profile:v main -level 3.1'; // デフォルト
+
+    if (is3DS) {
+        devicePrefix = 'n3ds_';
+        scaleFilter = ",scale=w='min(320,iw)':h=-2"; // 3DSは画面解像度に合わせて最大幅320px
+        fpsLimit = '-r 30'; // 3DSデコーダ上限の30fpsに制限
+        profileOption = '-profile:v baseline -level 3.0'; // 3DSはBaseline Profileが必須
+    } else if (isPSP) {
         devicePrefix = 'psp_';
-        scaleFilter = ",scale=w='min(480,iw)':h=-2"; // PSPは画面解像度に合わせ最大幅480pxに制限
+        scaleFilter = ",scale=w='min(480,iw)':h=-2"; // PSPは最大幅480px
+        fpsLimit = '-r 30'; // PSPも最大30fpsに制限
+        profileOption = '-profile:v baseline -level 3.0'; // PSPもBaselineが安全
     } else if (isLegacyDevice) {
         devicePrefix = 'legacy_';
-        scaleFilter = ",scale=w='min(1280,iw)':h=-2"; // Wii U等はデコーダ上限の720p(1280px)以下に制限
+        scaleFilter = ",scale=w='min(1280,iw)':h=-2"; // Wii U等は最大幅1280px (720p)
     }
 
     const cacheFileName = `${devicePrefix}${path.basename(file, '.mp4')}_${speed}x.mp4`;
@@ -134,6 +144,7 @@ app.get('/video', (req, res) => {
     }
 
     const pts = (1.0 / speed).toFixed(4);
+    
     // FFmpegの起動引数を配列化
     const ffmpegArgs = [
         '-i', sourcePath,
@@ -142,18 +153,28 @@ app.get('/video', (req, res) => {
         '-filter_complex', `[0:v]setpts=${pts}*PTS${scaleFilter}[v]`,
         '-map', '[v]',
         '-map', '1:a',
-        '-c:v', 'libx264',
-        '-profile:v', 'main',
-        '-level', '3.1',
+        '-c:v', 'libx264'
+    ];
+
+    // プロファイル引数をパースして追加
+    ffmpegArgs.push(...profileOption.split(' '));
+
+    // フレームレート制限の追加
+    if (fpsLimit) {
+        ffmpegArgs.push(...fpsLimit.split(' '));
+    }
+
+    // 残りの共通引数
+    ffmpegArgs.push(
         '-pix_fmt', 'yuv420p',
         '-c:a', 'aac',
         '-shortest',
         '-t', '60', // 出力動画の長さを最大1分(60秒)に制限
         '-preset', 'ultrafast',
         '-y', cachePath
-    ];
+    );
 
-    console.log(`\n[トランスコード開始] ファイル: ${file}, 設定速度: ${speed}x (制限時間: 最大60秒, 互換モード: ${isLegacyDevice ? 'オン' : 'オフ'})`);
+    console.log(`\n[トランスコード開始] ファイル: ${file}, 設定速度: ${speed}x (制限時間: 最大60秒, 互換モード: ${isLegacyDevice ? 'オン' : 'オフ'}${is3DS ? ' [New3DS用最適化]' : ''})`);
     const ffmpegProc = spawn('ffmpeg', ffmpegArgs);
 
     ffmpegProc.stderr.on('data', (data) => {
