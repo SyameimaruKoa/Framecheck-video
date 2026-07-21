@@ -12,6 +12,19 @@ if (!fs.existsSync(CACHE_DIR)) {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
 }
 
+// 起動時に ffmpeg コマンドの存在チェックを行う
+exec('ffmpeg -version', (error) => {
+    if (error) {
+        console.warn('\n\x1b[33m%s\x1b[0m', '======================================================================');
+        console.warn('\x1b[33m%s\x1b[0m', '【警告】システムに ffmpeg コマンドがインストールされていないか、PATHが通っていません。');
+        console.warn('\x1b[33m%s\x1b[0m', 'Wii UやPSPなどのレガシー機器向けの自動トランスコード配信や、倍速計算は機能しません。');
+        console.warn('\x1b[33m%s\x1b[0m', 'npm方式でこれらの機能を使用するには、ホストPCに ffmpeg を導入してください。');
+        console.warn('\x1b[33m%s\x1b[0m', '======================================================================\n');
+    } else {
+        console.log('ffmpeg の起動を確認しました。自動互換トランスコード配信が有効です。');
+    }
+});
+
 app.use(express.static(__dirname));
 
 app.get('/nojs', (req, res) => {
@@ -121,7 +134,9 @@ app.get('/video', (req, res) => {
     exec(ffmpegCmd, (error) => {
         if (error) {
             console.error(`ffmpeg error: ${error.message}`);
-            return res.status(500).send('Server-side video computation failed. Make sure ffmpeg is installed.');
+            console.log('ffmpegによる変換に失敗したため、元の動画ファイルをフォールバック配信します。');
+            // トランスコードに失敗（ffmpegが無い等）した場合は、元のファイルをそのまま送信する
+            return res.sendFile(sourcePath);
         }
         res.sendFile(cachePath);
     });
