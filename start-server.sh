@@ -50,11 +50,17 @@ read -p "番号を入力してください (1-6): " CHOICE
 
 case "$CHOICE" in
     1)
-        echo "Docker Composeでサーバーを起動します..."
+        echo "Docker Composeの起動を確認しています..."
         if docker compose version >/dev/null 2>&1; then
+            echo "docker compose (V2) でサーバーを起動します..."
             docker compose up
-        else
+        elif docker-compose version >/dev/null 2>&1; then
+            echo "docker-compose (V1) でサーバーを起動します..."
             docker-compose up
+        else
+            echo "【エラー】Docker または Docker Compose が見つからないか、起動していません。"
+            echo "Dockerがインストール・起動しているか確認するか、他の起動方法（npm, Python, PHP等）をお試しください。"
+            exit 1
         fi
         ;;
     2)

@@ -29,12 +29,21 @@ echo 無効な入力です。もう一度入力してください。
 goto menu
 
 :run_docker
-echo Docker Composeでサーバーを起動します...
+echo Docker Composeの起動を確認しています...
 docker compose version >nul 2>nul
-if %errorlevel% equ 0 (
-    docker compose up
+if errorlevel 1 (
+    docker-compose version >nul 2>nul
+    if errorlevel 1 (
+        echo 【エラー】Docker または Docker Compose が見つからないか、起動していません。
+        echo Docker Desktopが起動しているか確認するか、他の起動方法（npm, Python, PHP等）をお試しください。
+        goto end
+    ) else (
+        echo docker-compose (V1) でサーバーを起動します...
+        docker-compose up
+    )
 ) else (
-    docker-compose up
+    echo docker compose (V2) でサーバーを起動します...
+    docker compose up
 )
 goto end
 
