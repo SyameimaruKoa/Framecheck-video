@@ -128,14 +128,13 @@ app.get('/video', (req, res) => {
     }
 
     const pts = (1.0 / speed).toFixed(4);
-    // H.264 Main Profile, Level 3.1, YUV420p で古いデコーダに対する完全な互換性を確保
-    const ffmpegCmd = `ffmpeg -i "${sourcePath}" -filter:v "setpts=${pts}*PTS${scaleFilter}" -c:v libx264 -profile:v main -level 3.1 -pix_fmt yuv420p -preset ultrafast -an -y "${cachePath}"`;
+    // H.264 Main Profile, Level 3.1, YUV420p + AACステレオ無音音声 を結合して古いデコーダに対する完全な互換性を確保
+    const ffmpegCmd = `ffmpeg -i "${sourcePath}" -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 -filter_complex "[0:v]setpts=${pts}*PTS${scaleFilter}[v]" -map "[v]" -map 1:a -c:v libx264 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -shortest -preset ultrafast -y "${cachePath}"`;
 
     exec(ffmpegCmd, (error) => {
         if (error) {
             console.error(`ffmpeg error: ${error.message}`);
             console.log('ffmpegによる変換に失敗したため、元の動画ファイルをフォールバック配信します。');
-            // トランスコードに失敗（ffmpegが無い等）した場合は、元のファイルをそのまま送信する
             return res.sendFile(sourcePath);
         }
         res.sendFile(cachePath);
