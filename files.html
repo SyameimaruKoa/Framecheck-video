@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファイル一覧 - フレームカウント動画</title>
+</head>
+<body style="max-width: 800px; margin: 0 auto; padding: 10px; font-family: sans-serif; box-sizing: border-box;">
+    <h1>ファイル一覧・ダウンロード</h1>
+    <p><a href="index.html">トップページへ戻る</a></p>
+
+    <h2>動画バージョン: V2 60fps</h2>
+    <ul>
+        <li>
+            <strong>Framecount_V2_60fps.mp4 (ローカル軽量版)</strong> - 内部リンク
+            <br>
+            <a href="videos/Framecount_V2_60fps.mp4" download>ダウンロード</a>
+            <button onclick="playMedia('videos/Framecount_V2_60fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>Framecount_V2_60fps.swf (Flash用レトロ機器向け)</strong> - 内部リンク
+            <br>
+            <a href="videos/Framecount_V2_60fps.swf" download>ダウンロード</a>
+            <button onclick="playMedia('videos/Framecount_V2_60fps.swf', 'flash', this)">ブラウザで再生 (Flashエミュレータ)</button>
+        </li>
+        <li>
+            <strong>H264-720p_60fps.mp4 (バックアップリンク)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_60fps.mp4" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_60fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>H265-2160p_60fps.mp4 (高画質版)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_60fps.mp4" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_60fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>VP9-2160p_60fps.webm (高画質版)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_60fps.webm" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_60fps.webm', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>flv1-270p_60fps.swf (バックアップリンク Flash)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_60fps.swf" download>ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_60fps.swf', 'flash', this)">ブラウザで再生 (Flashエミュレータ)</button>
+        </li>
+    </ul>
+
+    <h2>動画バージョン: V2 24fps</h2>
+    <ul>
+        <li>
+            <strong>Framecount_V2_24fps.mp4 (ローカル軽量版)</strong> - 内部リンク
+            <br>
+            <a href="videos/Framecount_V2_24fps.mp4" download>ダウンロード</a>
+            <button onclick="playMedia('videos/Framecount_V2_24fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>Framecount_V2_24fps.swf (Flash用レトロ機器向け)</strong> - 内部リンク
+            <br>
+            <a href="videos/Framecount_V2_24fps.swf" download>ダウンロード</a>
+            <button onclick="playMedia('videos/Framecount_V2_24fps.swf', 'flash', this)">ブラウザで再生 (Flashエミュレータ)</button>
+        </li>
+        <li>
+            <strong>H264-720p_24fps.mp4 (バックアップリンク)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_24fps.mp4" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_24fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>H265-2160p_24fps.mp4 (高画質版)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_24fps.mp4" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_24fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>VP9-2160p_24fps.webm (高画質版)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_24fps.webm" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_24fps.webm', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>flv1-270p_24fps.swf (バックアップリンク Flash)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_24fps.swf" download>ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_24fps.swf', 'flash', this)">ブラウザで再生 (Flashエミュレータ)</button>
+        </li>
+    </ul>
+
+    <h2>動画バージョン: V1</h2>
+    <ul>
+        <li>
+            <strong>frametest_v1.mp4 (ローカル軽量版)</strong> - 内部リンク
+            <br>
+            <a href="videos/frametest_v1.mp4" download>ダウンロード</a>
+            <button onclick="playMedia('videos/frametest_v1.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+        <li>
+            <strong>frametest_v1_60fps.mp4 (バックアップリンク)</strong> - 外部リンク
+            <br>
+            <a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/frametest_v1_60fps.mp4" target="_blank" rel="noopener noreferrer">ダウンロード</a>
+            <button onclick="playMedia('https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/frametest_v1_60fps.mp4', 'video', this)">ブラウザで再生</button>
+        </li>
+    </ul>
+
+    <script>
+        function playMedia(url, type, button) {
+            var containerId = 'player-container-' + button.parentNode.id;
+            var existingContainer = document.getElementById(containerId);
+            if (existingContainer) {
+                existingContainer.parentNode.removeChild(existingContainer);
+                button.textContent = 'ブラウザで再生' + (type === 'flash' ? ' (Flashエミュレータ)' : '');
+                return;
+            }
+
+            if (!button.parentNode.id) {
+                button.parentNode.id = 'item-' + Math.random().toString(36).substr(2, 9);
+            }
+            containerId = 'player-container-' + button.parentNode.id;
+
+            var container = document.createElement('div');
+            container.id = containerId;
+            container.style.marginTop = '10px';
+            container.style.maxWidth = '100%';
+
+            if (type === 'video') {
+                var video = document.createElement('video');
+                video.src = url;
+                video.controls = true;
+                video.autoplay = true;
+                video.style.maxWidth = '100%';
+                video.style.height = 'auto';
+                container.appendChild(video);
+            } else if (type === 'flash') {
+                var iframe = document.createElement('iframe');
+                iframe.src = 'flash_player.html?file=' + encodeURIComponent(url);
+                iframe.style.width = '100%';
+                iframe.style.height = '360px';
+                iframe.style.border = 'none';
+                container.appendChild(iframe);
+            }
+
+            button.parentNode.appendChild(container);
+            button.textContent = '再生を閉じる';
+        }
+    </script>
+</body>
+</html>

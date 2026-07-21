@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  framecheck-server:
+    build: .
+    ports:
+      - "24680:24680"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - PORT=24680
+      - NODE_ENV=production

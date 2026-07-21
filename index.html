@@ -9,12 +9,22 @@
 </head>
 
 <body>
+    <noscript>
+        <div style="background-color: #ffe6e6; border: 1px solid #ffb3b3; padding: 10px; margin: 10px 0; font-family: sans-serif;">
+            <strong>JavaScriptが無効になっています。</strong><br>
+            JavaScriptが動作しないブラウザ（レガシー機器など）で動画の再生速度（FPS）を変更するには、
+            サーバー側で計算を行う「<a href="/nojs">JS非対応ブラウザ向けページ</a>」をご利用ください。
+        </div>
+    </noscript>
+
     <h1>モニターの残像やすべてのフレームが正常に表示されているかを調べる動画です</h1>
     <nav>
         <ul>
             <li><a href="#v2-60fps">60fps版</a></li>
             <li><a href="#v2-24fps">24fps版</a></li>
             <li><a href="#v1">旧バージョンファイル</a></li>
+            <li><a href="files.html">ファイル一覧・ダウンロード</a></li>
+            <li><a href="flash_player.html?file=videos/Framecount_V2_60fps.swf">Flashエミュレータ</a></li>
             <li><a href="#notes">注意事項・ソースコード</a></li>
         </ul>
     </nav>
@@ -23,34 +33,20 @@
         <object type="application/x-shockwave-flash" data="videos/Framecount_V2_60fps.swf" width="480" height="270">
             <param name="movie" value="videos/Framecount_V2_60fps.swf">
             <param name="loop" value="true">
-            <p>お使いのブラウザは動画の埋め込み再生に対応していません。下のリンクからダウンロードしてご覧ください。</p>
+            <p>お使いのブラウザは動画の埋め込み再生に対応していません。ダウンロードしてご覧ください。</p>
         </object>
     </video>
     <button id="btn_60">60fps</button>
     <button id="btn_60_90">90fps</button>
     <button id="btn_60_120">120fps</button>
     <button id="btn_60_180">180fps</button>
-    <dl>
-        <dt><a href="videos/Framecount_V2_60fps.mp4" download="Framecount_V2_60fps.mp4">軽量ファイルダウンロード</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_60fps.mp4">バックアップリンク
-                (H264 720p)</a></dd>
-        <dt><a href="videos/Framecount_V2_60fps.swf" download="Framecount_V2_60fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a>
-        </dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_60fps.swf">バックアップリンク
-                (Flash)</a></dd>
-        <dt>高画質版ファイルダウンロード (H265 / VP9)</dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_60fps.mp4">ダウンロード
-                (H265 2160p)</a></dd>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_60fps.webm">ダウンロード
-                (VP9 2160p)</a></dd>
-    </dl>
 
     <h2 id="v2-24fps">24fps版</h2>
     <video src="videos/Framecount_V2_24fps.mp4" controls loop loading="lazy" preload="metadata">
         <object type="application/x-shockwave-flash" data="videos/Framecount_V2_24fps.swf" width="480" height="270">
             <param name="movie" value="videos/Framecount_V2_24fps.swf">
             <param name="loop" value="true">
-            <p>お使いのブラウザは動画の埋め込み再生に対応していません。下のリンクからダウンロードしてご覧ください。</p>
+            <p>お使いのブラウザは動画の埋め込み再生に対応していません。ダウンロードしてご覧ください。</p>
         </object>
     </video>
     <button id="btn_24">24fps</button>
@@ -58,28 +54,9 @@
     <button id="btn_24_72">72fps</button>
     <button id="btn_24_96">96fps</button>
     <button id="btn_24_144">144fps</button>
-    <dl>
-        <dt><a href="videos/Framecount_V2_24fps.mp4" download="Framecount_V2_24fps.mp4">軽量ファイルダウンロード</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H264-720p_24fps.mp4">バックアップリンク
-                (H264 720p)</a></dd>
-        <dt><a href="videos/Framecount_V2_24fps.swf" download="Framecount_V2_24fps.swf">Flash用ファイルダウンロード(レトロ機器向け)</a>
-        </dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/flv1-270p_24fps.swf">バックアップリンク
-                (Flash)</a></dd>
-        <dt>高画質版ファイルダウンロード (H265 / VP9)</dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/H265-2160p_24fps.mp4">ダウンロード
-                (H265 2160p)</a></dd>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/VP9-2160p_24fps.webm">ダウンロード
-                (VP9 2160p)</a></dd>
-    </dl>
 
     <h2 id="v1">旧バージョンファイル</h2>
     <video src="videos/frametest_v1.mp4" controls loop loading="lazy" preload="metadata"></video>
-    <dl>
-        <dt><a href="videos/frametest_v1.mp4" download="frametest_v1.mp4">軽量ファイルダウンロード</a></dt>
-        <dd><a href="https://github.com/SyameimaruKoa/Framecheck-video/releases/download/1/frametest_v1_60fps.mp4">バックアップリンク
-                (GitHub Release)</a></dd>
-    </dl>
 
     <hr>
     <h2 id="notes">注意事項・ソースコード</h2>

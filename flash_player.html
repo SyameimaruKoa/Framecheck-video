@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ネイティブ Flash 再生 - フレームカウント動画</title>
+</head>
+<body style="max-width: 800px; margin: 0 auto; padding: 10px; font-family: sans-serif; box-sizing: border-box;">
+    <h1>ネイティブ Flash プレイヤー</h1>
+    <p><a href="index.html">通常ページへ戻る</a> | <a href="files.html">ファイル一覧へ戻る</a></p>
+    
+    <div id="player-container" style="max-width: 100%; height: auto;">
+        <!-- 標準の Flash 埋め込み (JS非対応ブラウザではこれがそのまま読み込まれます) -->
+        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="480" height="270" id="flashMovie">
+            <param name="allowScriptAccess" value="sameDomain">
+            <param name="allowFullScreen" value="false">
+            <param name="movie" value="videos/Framecount_V2_60fps.swf">
+            <param name="quality" value="high">
+            <param name="bgcolor" value="#ffffff">
+            <param name="loop" value="true">
+            <param name="FlashVars" value="speed=1.0">
+            <embed src="videos/Framecount_V2_60fps.swf" quality="high" bgcolor="#ffffff" width="480" height="270" name="flashMovie" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="speed=1.0">
+        </object>
+    </div>
+
+    <div style="margin-top: 10px; font-size: 0.9em; color: #666;" id="info-text">
+        ※ネイティブでFlash対応のデバイス（PSP, Wii U等）用の埋め込みプレイヤーです。<br>
+        JS非対応ブラウザで再生速度を切り替えるには、リンクから直接パラメータ付きのページにアクセスしてください。
+    </div>
+
+    <!-- JS対応ブラウザ向け：クエリパラメータから動的にSWFファイルと速度（FlashVars）を差し替える処理 -->
+    <script>
+        (function() {
+            function getQueryParam(name) {
+                var urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+            var file = getQueryParam('file') || 'videos/Framecount_V2_60fps.swf';
+            var speed = getQueryParam('speed') || '1.0';
+            
+            if (getQueryParam('file') || getQueryParam('speed')) {
+                var container = document.getElementById('player-container');
+                var info = document.getElementById('info-text');
+                info.innerHTML = "再生ファイル: " + file + " (速度: " + speed + "倍)<br>※ネイティブでFlash対応のデバイス用の埋め込みプレイヤーです。";
+                
+                container.innerHTML = 
+                    '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="270" id="flashMovie">' +
+                    '  <param name="movie" value="' + file + '">' +
+                    '  <param name="quality" value="high">' +
+                    '  <param name="loop" value="true">' +
+                    '  <param name="FlashVars" value="speed=' + speed + '">' +
+                    '  <embed src="' + file + '" quality="high" width="480" height="270" name="flashMovie" type="application/x-shockwave-flash" FlashVars="speed=' + speed + '">' +
+                    '</object>';
+            }
+        })();
+    </script>
+</body>
+</html>
