@@ -142,11 +142,12 @@ app.get('/video', (req, res) => {
         '-pix_fmt', 'yuv420p',
         '-c:a', 'aac',
         '-shortest',
+        '-t', '60', // 出力動画の長さを最大1分(60秒)に制限
         '-preset', 'ultrafast',
         '-y', cachePath
     ];
 
-    console.log(`\n[トランスコード開始] ファイル: ${file}, 設定速度: ${speed}x (互換モード: ${isLegacyDevice ? 'オン' : 'オフ'})`);
+    console.log(`\n[トランスコード開始] ファイル: ${file}, 設定速度: ${speed}x (制限時間: 最大60秒, 互換モード: ${isLegacyDevice ? 'オン' : 'オフ'})`);
     const ffmpegProc = spawn('ffmpeg', ffmpegArgs);
 
     ffmpegProc.stderr.on('data', (data) => {
