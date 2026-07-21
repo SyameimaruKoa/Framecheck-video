@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 
 const app = express();
 const PORT = process.env.PORT || 24680;
@@ -128,16 +128,54 @@ app.get('/video', (req, res) => {
     }
 
     const pts = (1.0 / speed).toFixed(4);
-    // H.264 Main Profile, Level 3.1, YUV420p + AACステレオ無音音声 を結合して古いデコーダに対する完全な互換性を確保
-    const ffmpegCmd = `ffmpeg -i "${sourcePath}" -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 -filter_complex "[0:v]setpts=${pts}*PTS${scaleFilter}[v]" -map "[v]" -map 1:a -c:v libx264 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -shortest -preset ultrafast -y "${cachePath}"`;
+    // FFmpegの起動引数を配列化
+    const ffmpegArgs = [
+        '-i', sourcePath,
+        '-f', 'lavfi',
+        '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
+        '-filter_complex', `[0:v]setpts=${pts}*PTS${scaleFilter}[v]`,
+        '-map', '[v]',
+        '-map', '1:a',
+        '-c:v', 'libx264',
+        '-profile:v', 'main',
+        '-level', '3.1',
+        '-pix_fmt', 'yuv420p',
+        '-c:a', 'aac',
+        '-shortest',
+        '-preset', 'ultrafast',
+        '-y', cachePath
+    ];
 
-    exec(ffmpegCmd, (error) => {
-        if (error) {
-            console.error(`ffmpeg error: ${error.message}`);
-            console.log('ffmpegによる変換に失敗したため、元の動画ファイルをフォールバック配信します。');
-            return res.sendFile(sourcePath);
+    console.log(`\n[トランスコード開始] ファイル: ${file}, 設定速度: ${speed}x (互換モード: ${isLegacyDevice ? 'オン' : 'オフ'})`);
+    const ffmpegProc = spawn('ffmpeg', ffmpegArgs);
+
+    ffmpegProc.stderr.on('data', (data) => {
+        const text = data.toString();
+        // FFmpegの進捗出力から frame, time, speed を抽出して上書き表示
+        const match = text.match(/frame=\s*(\d+).*time=\s*([\d:.]+).*speed=\s*([\d.x]+)/);
+        if (match) {
+            const frame = match[1];
+            const time = match[2];
+            const speedVal = match[3];
+            process.stdout.write(`\r[トランスコード進捗] ${file} (${speed}x): frame=${frame}, time=${time}, speed=${speedVal}`);
         }
-        res.sendFile(cachePath);
+    });
+
+    ffmpegProc.on('close', (code) => {
+        console.log(`\n[トランスコード完了] ファイル: ${file}, 速度: ${speed}x (終了コード: ${code})`);
+        if (code === 0) {
+            res.sendFile(cachePath);
+        } else {
+            console.error(`[エラー] ffmpeg が異常終了しました (コード: ${code})`);
+            console.log('ffmpegによる変換に失敗したため、元の動画ファイルをフォールバック配信します。');
+            res.sendFile(sourcePath);
+        }
+    });
+
+    ffmpegProc.on('error', (err) => {
+        console.error('[エラー] ffmpeg プロセスの起動に失敗しました:', err.message);
+        console.log('フォールバック配信として元のファイルを送信します。');
+        res.sendFile(sourcePath);
     });
 });
 
