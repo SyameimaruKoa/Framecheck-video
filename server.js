@@ -49,7 +49,7 @@ app.get('/nojs', (req, res) => {
     </ul>
 
     <h2>2. Flash版 (ネイティブFlash対応デバイス向け - 速度パラメータ送信)</h2>
-    <p>Wii UやPSPなどのFlashプラグイン搭載デバイス向けです。JSの代わりにFlashPlayer側で速度処理をエミュレートします。</p>
+    <p>※Wii UはFlashプラグイン非搭載のためFlash版は利用できません。上の通常動画版をご利用ください。PSP等のFlash対応デバイス用です。</p>
     <h3>60fps版 (SWFパラメータリンク)</h3>
     <ul>
         <li><a href="/flash?file=videos/Framecount_V2_60fps.swf&speed=1.0">1.0倍速</a></li>
@@ -84,11 +84,30 @@ app.get('/video', (req, res) => {
         return res.status(404).send('Source video not found.');
     }
 
-    if (speed === 1.0) {
+    // アクセス元のUser-Agentに基づくレガシーデバイス判定
+    const ua = req.headers['user-agent'] || '';
+    const isWiiU = /WiiU/i.test(ua);
+    const isPSP = /PSP|PlayStation Portable/i.test(ua);
+    const isLegacyDevice = isWiiU || isPSP || /Nintendo|PlayStation/i.test(ua) || req.query.compat === '1';
+
+    // PCやスマホなど、レガシー以外の通常端末での1.0倍速は元ファイルをそのまま送信
+    if (speed === 1.0 && !isLegacyDevice) {
         return res.sendFile(sourcePath);
     }
 
-    const cacheFileName = `${path.basename(file, '.mp4')}_${speed}x.mp4`;
+    // デバイスに応じた解像度とキャッシュ接頭辞の決定
+    let devicePrefix = '';
+    let scaleFilter = '';
+    
+    if (isPSP) {
+        devicePrefix = 'psp_';
+        scaleFilter = ",scale=w='min(480,iw)':h=-2"; // PSPは画面解像度に合わせ最大幅480pxに制限
+    } else if (isLegacyDevice) {
+        devicePrefix = 'legacy_';
+        scaleFilter = ",scale=w='min(1280,iw)':h=-2"; // Wii U等はデコーダ上限の720p(1280px)以下に制限
+    }
+
+    const cacheFileName = `${devicePrefix}${path.basename(file, '.mp4')}_${speed}x.mp4`;
     const cachePath = path.join(CACHE_DIR, cacheFileName);
 
     if (fs.existsSync(cachePath)) {
@@ -96,7 +115,8 @@ app.get('/video', (req, res) => {
     }
 
     const pts = (1.0 / speed).toFixed(4);
-    const ffmpegCmd = `ffmpeg -i "${sourcePath}" -filter:v "setpts=${pts}*PTS" -c:v libx264 -preset ultrafast -an -y "${cachePath}"`;
+    // H.264 Main Profile, Level 3.1, YUV420p で古いデコーダに対する完全な互換性を確保
+    const ffmpegCmd = `ffmpeg -i "${sourcePath}" -filter:v "setpts=${pts}*PTS${scaleFilter}" -c:v libx264 -profile:v main -level 3.1 -pix_fmt yuv420p -preset ultrafast -an -y "${cachePath}"`;
 
     exec(ffmpegCmd, (error) => {
         if (error) {
