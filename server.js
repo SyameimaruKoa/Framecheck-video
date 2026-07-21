@@ -63,6 +63,12 @@ app.get('/nojs', (req, res) => {
 
     <h2>2. Flash版 (ネイティブFlash対応デバイス向け - 速度パラメータ送信)</h2>
     <p>※Wii UはFlashプラグイン非搭載のためFlash版は利用できません。上の通常動画版をご利用ください。PSP等のFlash対応デバイス用です。</p>
+    <p><strong>【PSP等でメモリ不足エラーが出る場合】</strong><br>
+       HTMLプレイヤーを経由せず、以下のSWFファイルへ直接アクセス（直リンク）してお試しください（HTML等のメモリが削減され起動しやすくなります）：<br>
+       ・<a href="videos/Framecount_V2_60fps.swf">60fps版 SWF直接表示 (倍速変更不可)</a><br>
+       ・<a href="videos/Framecount_V2_24fps.swf">24fps版 SWF直接表示 (倍速変更不可)</a>
+    </p>
+    
     <h3>60fps版 (SWFパラメータリンク)</h3>
     <ul>
         <li><a href="/flash?file=videos/Framecount_V2_60fps.swf&speed=1.0">1.0倍速</a></li>
