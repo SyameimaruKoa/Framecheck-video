@@ -51,7 +51,11 @@ read -p "番号を入力してください (1-6): " CHOICE
 case "$CHOICE" in
     1)
         echo "Docker Composeでサーバーを起動します..."
-        docker-compose up
+        if docker compose version >/dev/null 2>&1; then
+            docker compose up
+        else
+            docker-compose up
+        fi
         ;;
     2)
         echo "npmサーバーを起動します..."

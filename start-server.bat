@@ -30,7 +30,12 @@ goto menu
 
 :run_docker
 echo Docker Composeでサーバーを起動します...
-docker-compose up
+docker compose version >nul 2>nul
+if %errorlevel% equ 0 (
+    docker compose up
+) else (
+    docker-compose up
+)
 goto end
 
 :run_npm
