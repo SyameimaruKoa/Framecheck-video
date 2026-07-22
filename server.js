@@ -56,6 +56,11 @@ app.get('/nojs', (req, res) => {
         <li><a href="/video?file=Framecount_V2_24fps.mp4&speed=4.0">96fps (4.0倍速)</a></li>
         <li><a href="/video?file=Framecount_V2_24fps.mp4&speed=6.0">144fps (6.0倍速)</a></li>
     </ul>
+    <h3>New3DS向け最適化版 (SDカード直接ダウンロード/再生)</h3>
+    <ul>
+        <li><a href="videos/Framecount_New3DS_60fps.mkv" download>New3DS 60fps版 (Framecount_New3DS_60fps.mkv)</a></li>
+        <li><a href="videos/Framecount_New3DS_24fps.mkv" download>New3DS 24fps版 (Framecount_New3DS_24fps.mkv)</a></li>
+    </ul>
     <h3>旧バージョン</h3>
     <ul>
         <li><a href="/video?file=frametest_v1.mp4&speed=1.0">V1 60fps (1.0倍速)</a></li>
@@ -91,7 +96,7 @@ app.get('/nojs', (req, res) => {
 app.get('/video', (req, res) => {
     const file = req.query.file;
     const speed = parseFloat(req.query.speed || '1.0');
-    const allowedFiles = ['Framecount_V2_60fps.mp4', 'Framecount_V2_24fps.mp4', 'frametest_v1.mp4'];
+    const allowedFiles = ['Framecount_V2_60fps.mp4', 'Framecount_V2_24fps.mp4', 'frametest_v1.mp4', 'Framecount_New3DS_60fps.mkv', 'Framecount_New3DS_24fps.mkv'];
     const allowedSpeeds = [1.0, 1.5, 2.0, 3.0, 4.0, 6.0];
 
     if (!allowedFiles.includes(file) || !allowedSpeeds.includes(speed)) {
